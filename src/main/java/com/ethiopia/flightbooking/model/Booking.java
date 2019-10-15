@@ -23,7 +23,7 @@ public class Booking
     private String confirmationCode;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    private Passenger passenger;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Flight departingFlight;

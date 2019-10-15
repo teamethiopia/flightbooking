@@ -1,7 +1,6 @@
 package com.ethiopia.flightbooking.model;
 
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +12,9 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "admins")
+public class Admin
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -33,9 +33,5 @@ public class User {
 
     @Column(name = "password")
     private String passWord;
-
-    @Column(name = "role")
-    private Role role;
-
 
 }
