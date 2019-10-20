@@ -3,6 +3,7 @@ package com.ethiopia.flightbooking.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -39,9 +40,11 @@ public class Flight
     private LocalDate dateOfFlight;
 
     @Column(name = "departuretime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalTime departureTime;
 
     @Column(name = "arrivaltime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalTime arrivalTime;
 
 

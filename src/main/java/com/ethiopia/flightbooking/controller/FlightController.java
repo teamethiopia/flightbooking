@@ -9,10 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -31,13 +28,15 @@ public class FlightController {
         model.addAttribute("flights",new Flight());
        return "add-new-flight" ;
     }
-    @RequestMapping("/save")
+
+//    ###############################################################################################
+    @RequestMapping(value = "/save" ,method = RequestMethod.POST)
 
     public String save(@Valid @ModelAttribute Flight flight , BindingResult result) {
         if(result.hasErrors())
             return "add-new-flight";
         flightService.saveFlight(flight);
-        return "redirect:/view-all-flight";
+        return "redirect:view-all-flight";
 
     }
   //  ################################################################################################
