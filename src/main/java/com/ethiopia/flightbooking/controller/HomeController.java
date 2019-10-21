@@ -8,12 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController
 {
-    @GetMapping(value = {"/flightbooking", "/flightbooking/home"})
+    @GetMapping(value = {"/flightbooking", "/flightbooking/home",""})
     public ModelAndView home()
     {
         ModelAndView mav = new ModelAndView();
         mav.addObject("flight",new Flight());
-        mav.setViewName("index");
+        mav.setViewName("home/index");
         return mav;
     }
 
