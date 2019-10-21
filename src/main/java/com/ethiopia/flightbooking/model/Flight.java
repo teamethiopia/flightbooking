@@ -1,52 +1,74 @@
 package com.ethiopia.flightbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "flights")
-public class Flight
-{
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "flight")
+public class Flight {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(name = "flightnumber")
-    private String flightNumber;
+    @NotEmpty
+    private String flightnr;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @Future
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-dd-MM")
+    private Date departureDate;
+
+    @NotNull
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date departureTime;
+
+    @NotNull
+    @Future
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-dd-MM")
+    private Date arrivalDate;
+
+    @NotNull
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date arrivalTime;
+
+
+    @ManyToOne
     private Airline airline;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Airport origin;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     private Airport destination;
 
-    @ManyToOne(cascade = CascadeType.ALL) // Many flights can have the same airplane multiplexed by time.
+
+    @ManyToOne
     private Airplane airplane;
 
-    @Column(name = "dateofflight")
-    private LocalDate dateOfFlight;
 
-    @Column(name = "departuretime")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalTime departureTime;
-
-    @Column(name = "arrivaltime")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalTime arrivalTime;
-
+    @OneToMany
+    private List<Booking> bookings;
 
 
 }

@@ -1,43 +1,59 @@
 package com.ethiopia.flightbooking.service.impl;
 
+import com.ethiopia.flightbooking.exception.InvalidFlightException;
 import com.ethiopia.flightbooking.model.Flight;
 import com.ethiopia.flightbooking.repository.FlightRepository;
 import com.ethiopia.flightbooking.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public class FlightServiceImpl implements FlightService
-{
+public class FlightServiceImpl implements FlightService {
+
     @Autowired
     FlightRepository flightRepository;
 
 
     @Override
-    public Page<Flight> getAllFlightsPaged(int pageNo) {
-        return flightRepository.findAll(PageRequest.of(pageNo,20));
+    public List<Flight> findAll() {
+        return (List<Flight>) flightRepository.findAll();
     }
 
     @Override
-    public Flight getFlightById(Integer id) {
-        return flightRepository.findById(id).orElse(null);
+    public Flight save(Flight flight) {
+        Flight firstFlight=flightRepository.save(flight);
+        return firstFlight;
     }
 
     @Override
-    public void deleteFlightById(Integer id) {
-        flightRepository.deleteById(id);
+    public Flight findOne(Long id) {
+        Optional<Flight> flight=flightRepository.findById(id);
+        return flight.orElse(null);
     }
 
     @Override
-    public Flight saveFlight(Flight flight) {
-        return flightRepository.save(flight);
+    public void delete(Long id) {
+    flightRepository.deleteById(id);
     }
 
+    @Override
+    public Flight validateFlight(String flightId) {
 
+        if(flightId==null || flightId.isEmpty()){
+            throw new InvalidFlightException("Invalid Flight Number" + flightId);
+        }
 
+        long flightID= Long.parseLong(flightId);
 
+        Flight flight=this.findOne(flightID);
 
+        if(flight==null){
+            throw new InvalidFlightException("Invalid Flight Number"+flightId);
+        }
 
+        return flight;
+    }
 }

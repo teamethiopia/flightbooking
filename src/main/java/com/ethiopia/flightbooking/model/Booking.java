@@ -3,44 +3,36 @@ package com.ethiopia.flightbooking.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "bookings")
-public class Booking
-{
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "booking")
+public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(name = "confirmationcode")
+    @NotNull
     private String confirmationCode;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private Date bookingDate;
+
+    @Valid
+    @ManyToOne
     private Passenger passenger;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Flight departingFlight;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Flight returningFlight;
-
-    @Column(name = "dateandtimeofbooking")
-    private LocalDateTime dateAndTimeOfBooking;
-
-    @Column(name = "flightclass")
-    private FlightClass flightClass;
-
-    @Column(name = "adult")
-    private int adult;
-    @Column(name = "children")
-    private int children;
-
+    @Valid
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Flight flight;
 
 }

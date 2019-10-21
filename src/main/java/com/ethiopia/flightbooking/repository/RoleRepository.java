@@ -1,11 +1,12 @@
 package com.ethiopia.flightbooking.repository;
 
-import com.ethiopia.flightbooking.model.Passenger;
+;
+import com.ethiopia.flightbooking.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PassengerRepository extends JpaRepository<Passenger,Integer>
-{
-}
+public interface RoleRepository extends JpaRepository<Role, Integer> {
+    Role findByRole(String role);
 
+}
