@@ -13,8 +13,8 @@ public class HomeController
     {
         ModelAndView mav = new ModelAndView();
         mav.addObject("flight",new Flight());
-        mav.setViewName("home/index");
+        mav.setViewName("index");
         return mav;
-    }
+                }
 
-}
+                }

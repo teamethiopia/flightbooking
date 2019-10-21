@@ -1,6 +1,7 @@
 package com.ethiopia.flightbooking.validator;
 
-import edu.mum.fbsapp.edu.mum.fbsapp.model.Flight;
+import com.ethiopia.flightbooking.model.Flight;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
