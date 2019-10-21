@@ -7,6 +7,25 @@ body, html {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	position: relative;
 }
 
+
+.booking-form {
+	background: rgba(0, 0, 0, 0.3);
+	padding: 40px;
+	border-radius: 6px;
+}
+
+
+.search_result_list
+{
+	background: rgba(0, 0, 0, 0.3);
+	padding: 40px;
+	border-radius: 6px;
+}
+
+.imgContainer{
+	float:left;
+}
 

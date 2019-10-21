@@ -41,6 +41,8 @@ public class Booking
     private int adult;
     @Column(name = "children")
     private int children;
+    @Column(name = "flightcount")
+    private String flightCount;
 
 
 }
