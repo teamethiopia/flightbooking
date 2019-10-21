@@ -1,36 +1,40 @@
 package com.ethiopia.flightbooking.service.impl;
 
-
 import com.ethiopia.flightbooking.model.Airport;
 import com.ethiopia.flightbooking.repository.AirportRepository;
 import com.ethiopia.flightbooking.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public class AirportServiceImpl implements AirportService
-{
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@Transactional
+public class AirportServiceImpl implements AirportService {
 
     @Autowired
     AirportRepository airportRepository;
 
     @Override
-    public Page<Airport> getAllAirportsPaged(int pageNo) {
-        return airportRepository.findAll(PageRequest.of(pageNo,20));
+    public List<Airport> findAll() {
+        return (List<Airport> )airportRepository.findAll();
     }
 
     @Override
-    public Airport getAirportById(Integer id) {
-        return airportRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void deleteAirportById(Integer id) {
-        airportRepository.deleteById(id);
-    }
-
-    @Override
-    public Airport saveAirport(Airport airport) {
+    public Airport save(Airport airport) {
         return airportRepository.save(airport);
+    }
+
+    @Override
+    public Airport findOne(Long id) {
+        Optional<Airport> airport=airportRepository.findById(id);
+        return airport.orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+    airportRepository.deleteById(id);
     }
 }
