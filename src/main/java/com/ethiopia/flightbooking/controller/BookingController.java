@@ -51,7 +51,7 @@ public class BookingController
             return airplaneService.findAll();
         }
 
-        @GetMapping(value = {"","/","/book"})
+        @GetMapping(value = {"/book"})
         public String getFlights(Model model){
             model.addAttribute("flights", flightService.findAll());
             return "booking/index";
