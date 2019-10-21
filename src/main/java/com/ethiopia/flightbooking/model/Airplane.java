@@ -28,7 +28,7 @@ public class Airplane {
     @NotEmpty
     private String model;
 
-    @Range(min = 0, max = 853)
+    @Range(min = 0, max = 800)
     private int capacity;
 
     @JsonIgnore
