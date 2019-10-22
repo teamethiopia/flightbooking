@@ -91,32 +91,86 @@
 
 
     <div style="padding-top: 2em">
-        <span style="font-size: 2em; color: #32a5e7;">New Airline Form</span>
+        <span style="font-size: 2em; color: #32a5e7;">Edit Airplane Form</span>
     </div>
     <p>&nbsp;</p>
 
-    <form id="newBookForm" method="post" action="/flightbooking/airline/new" th:object="${airline}">
+    <form id="newAirplaneForm" method="post" action="/flightbooking/airplane/edit" th:object="${airplane}">
         <fieldset>
-            <input type="hidden" name="airlineId" th:value="${airline.airlineId}"/>
+            <input type="hidden" name="airplaneId" th:value="${airplane.airplaneId}"/>
 
 
             <div class="row">
-                <div class="col-md-12">
+
+
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="airlineName">Airline Name</label>
-                        <span th:if="${#fields.hasErrors('airlineName')}" th:errors="*{airlineName}"
+                        <label for="airplaneSerialNumber">Airplane Serial Number</label>
+                        <span th:if="${#fields.hasErrors('airplaneSerialNumber')}" th:errors="*{airplaneSerialNumber}"
                               class="alert alert-danger"></span>
-                        <input id="airlineName" name="airlineName" type="text" class="form-control"
-                               th:value="${airline.airlineName}">
+                        <input id="airplaneSerialNumber" name="airplaneSerialNumber" type="text" class="form-control"
+                               th:value="${airplane.airplaneSerialNumber}">
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="airplaneModel">Airplane Model</label>
+                        <span th:if="${#fields.hasErrors('airplaneModel')}" th:errors="*{airplaneModel}"
+                              class="alert alert-danger"></span>
+                        <input id="airplaneModel" name="airplaneModel" type="text" class="form-control"
+                               th:value="${airplane.airplaneModel}">
+                    </div>
+                </div>
+
+
             </div>
+
+
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="firstClassSeats">Fist Class Seats</label>
+                        <span th:if="${#fields.hasErrors('firstClassSeats')}" th:errors="*{firstClassSeats}"
+                              class="alert alert-danger"></span>
+                        <input id="firstClassSeats" name="firstClassSeats" type="number" class="form-control"
+                               th:value="${airplane.firstClassSeats}">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="businessClassSeats">Business Class Seats</label>
+                        <span th:if="${#fields.hasErrors('businessClassSeats')}" th:errors="*{businessClassSeats}"
+                              class="alert alert-danger"></span>
+                        <input id="businessClassSeats" name="businessClassSeats" type="number" class="form-control"
+                               th:value="${airplane.businessClassSeats}">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="economyClassSeats">Economy Class Seats</label>
+                        <span th:if="${#fields.hasErrors('economyClassSeats')}" th:errors="*{economyClassSeats}"
+                              class="alert alert-danger"></span>
+                        <input id="economyClassSeats" name="economyClassSeats" type="number" class="form-control"
+                               th:value="${airplane.economyClassSeats}">
+                    </div>
+                </div>
+
+
+
+            </div>
+
 
 
 
             <div style="float:right;">
                 <a href="/flightbooking/airline/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Airline</button>
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Edit Airplane</button>
             </div>
         </fieldset>
     </form>

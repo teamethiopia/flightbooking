@@ -123,7 +123,7 @@
                 <!--th:onclick="@{document.location='/elibrary/book/edit/{bookId}'(bookId=${book.bookId})}" -->
                 <th scope="row" th:text="${iterStat.count}"></th>
                 <td th:text="${flight.flightNumber}"></td>
-                <td th:text="${flight.airline}"></td>
+                <td th:text="${flight.airline.airlineName}"></td>
                 <td th:text="${flight.origin.airportCity}"></td>
                 <td th:text="${flight.destination.airportCity}"></td>
                 <td th:text="${flight.airplane.airplaneModel}"></td>

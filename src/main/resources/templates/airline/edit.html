@@ -91,11 +91,11 @@
 
 
     <div style="padding-top: 2em">
-        <span style="font-size: 2em; color: #32a5e7;">New Airline Form</span>
+        <span style="font-size: 2em; color: #32a5e7;">Edit Airline Form</span>
     </div>
     <p>&nbsp;</p>
 
-    <form id="newBookForm" method="post" action="/flightbooking/airline/new" th:object="${airline}">
+    <form id="newBookForm" method="post" action="/flightbooking/airline/edit" th:object="${airline}">
         <fieldset>
             <input type="hidden" name="airlineId" th:value="${airline.airlineId}"/>
 
@@ -116,7 +116,7 @@
 
             <div style="float:right;">
                 <a href="/flightbooking/airline/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Airline</button>
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Update</button>
             </div>
         </fieldset>
     </form>

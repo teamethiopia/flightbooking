@@ -1,10 +1,217 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>FlightBooking</title>
+
+    <!-- Google font -->
+    <!--    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400" rel="stylesheet">-->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/static/css/SearchPageStyle.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
+
+    <![endif]-->
+
 </head>
 <body>
 
-</body>
+
+
+
+<div >
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+
+        <!--        <a class="navbar-brand" th:href="@{/flightbooking/home}">Home</a>-->
+        <a th:href="@{/flightbooking/home}" class="btn btn-success btn-lg" type="button">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">
+                    <span style="color:yellow; padding-left: 2em; padding-right: 1em;height: 50%">Welcome Admin</span>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">
+                    <a class="nav-link" href="/flightbooking/flight/list">Flights</a>
+                </li>
+                <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">
+                    <a class="nav-link" href="/flightbooking/airport/list">Airports</a>
+                </li>
+                <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">
+                    <a class="nav-link" href="/flightbooking/airline/list">Airlines</a>
+                </li>
+                <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">
+                    <a class="nav-link" href="/flightbooking/airplane/list">Airplanes</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">LogOut</a>
+            </form>
+
+
+
+
+
+        </div>
+    </nav>
+
+</div>
+
+
+
+
+
+
+
+<div style="size: auto;padding: 5px;" class="container">
+
+
+    <div style="padding-top: 2em">
+        <span style="font-size: 2em; color: #32a5e7;">New Airport Form</span>
+    </div>
+    <p>&nbsp;</p>
+
+    <form id="newAirportForm" method="post" action="/flightbooking/airport/new" th:object="${airport}">
+        <fieldset>
+            <input type="hidden" name="airportId" th:value="${airport.airportId}"/>
+
+
+            <div class="row">
+
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="airportName">Airport Name</label>
+                        <span th:if="${#fields.hasErrors('airportName')}" th:errors="*{airportName}"
+                              class="alert alert-danger"></span>
+                        <input id="airportName" name="airportName" type="text" class="form-control"
+                               th:value="${airport.airportName}">
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="airportCode">Airport Code</label>
+                        <span th:if="${#fields.hasErrors('airportCode')}" th:errors="*{airportCode}"
+                              class="alert alert-danger"></span>
+                        <input id="airportCode" name="airportCode" type="text" class="form-control"
+                               th:value="${airport.airportCode}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="airportCity">Airport City</label>
+                        <span th:if="${#fields.hasErrors('airportCity')}" th:errors="*{airportCity}"
+                              class="alert alert-danger"></span>
+                        <input id="airportCity" name="airportCity" type="text" class="form-control"
+                               th:value="${airport.airportCity}">
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <div style="float:right;">
+                <a href="/flightbooking/airport/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Register Airport</button>
+            </div>
+        </fieldset>
+    </form>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
 </html>

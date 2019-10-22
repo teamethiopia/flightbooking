@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class FlightServiceImpl implements FlightService
 {
@@ -23,7 +24,7 @@ public class FlightServiceImpl implements FlightService
 
     @Override
     public Page<Flight> getSearchedFlightsPaged(int pageNo,String s) {
-        return flightRepository.findFlightByDestinationIs(PageRequest.of(pageNo,20),s);
+        return flightRepository.findFlightByOrigin_AirportCityContains(PageRequest.of(pageNo,20),s);
     }
 
     @Override

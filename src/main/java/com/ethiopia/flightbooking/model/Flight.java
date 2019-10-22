@@ -1,6 +1,8 @@
 package com.ethiopia.flightbooking.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,25 +23,28 @@ public class Flight
     @Column(name = "flightnumber")
     private String flightNumber;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Airline airline;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Airport origin;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Airport destination;
 
-    @ManyToOne(cascade = CascadeType.ALL) // Many flights can have the same airplane multiplexed by time.
+    @ManyToOne(cascade = CascadeType.PERSIST) // Many flights can have the same airplane multiplexed by time.
     private Airplane airplane;
 
     @Column(name = "dateofflight")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfFlight;
 
     @Column(name = "departuretime")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime departureTime;
 
     @Column(name = "arrivaltime")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime arrivalTime;
 
 

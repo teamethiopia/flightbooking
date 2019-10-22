@@ -20,8 +20,8 @@ public class HomeController
     public ModelAndView home()
     {
         ModelAndView mav = new ModelAndView();
-        Flight flight = new Flight();
-        mav.addObject("flight",flight);
+//        Flight flight = new Flight();
+//        mav.addObject("flight",flight);
         mav.addObject("flightdto",new Flightdto());
         mav.addObject("first",FlightClass.FIRST);
         mav.addObject("business",FlightClass.BUSINESS);

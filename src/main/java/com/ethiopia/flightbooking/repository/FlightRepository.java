@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface FlightRepository extends JpaRepository<Flight,Integer>
 {
 
-    Page<Flight> findFlightByDestinationIs(Pageable pageable,String destination);
+    Page<Flight> findFlightByOrigin_AirportCityContains(Pageable pageable,String destination);
 
 
 

@@ -91,32 +91,64 @@
 
 
     <div style="padding-top: 2em">
-        <span style="font-size: 2em; color: #32a5e7;">New Airline Form</span>
+        <span style="font-size: 2em; color: #32a5e7;">Edit Airport Form</span>
     </div>
     <p>&nbsp;</p>
 
-    <form id="newBookForm" method="post" action="/flightbooking/airline/new" th:object="${airline}">
+    <form id="newAirportForm" method="post" action="/flightbooking/airport/edit" th:object="${airport}">
         <fieldset>
-            <input type="hidden" name="airlineId" th:value="${airline.airlineId}"/>
+            <input type="hidden" name="airportId" th:value="${airport.airportId}"/>
 
 
             <div class="row">
+
+
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="airlineName">Airline Name</label>
-                        <span th:if="${#fields.hasErrors('airlineName')}" th:errors="*{airlineName}"
+                        <label for="airportName">Airport Name</label>
+                        <span th:if="${#fields.hasErrors('airportName')}" th:errors="*{airportName}"
                               class="alert alert-danger"></span>
-                        <input id="airlineName" name="airlineName" type="text" class="form-control"
-                               th:value="${airline.airlineName}">
+                        <input id="airportName" name="airportName" type="text" class="form-control"
+                               th:value="${airport.airportName}">
                     </div>
                 </div>
+
+
             </div>
 
 
 
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="airportCode">Airport Code</label>
+                        <span th:if="${#fields.hasErrors('airportCode')}" th:errors="*{airportCode}"
+                              class="alert alert-danger"></span>
+                        <input id="airportCode" name="airportCode" type="text" class="form-control"
+                               th:value="${airport.airportCode}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="airportCity">Airport City</label>
+                        <span th:if="${#fields.hasErrors('airportCity')}" th:errors="*{airportCity}"
+                              class="alert alert-danger"></span>
+                        <input id="airportCity" name="airportCity" type="text" class="form-control"
+                               th:value="${airport.airportCity}">
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
             <div style="float:right;">
-                <a href="/flightbooking/airline/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Airline</button>
+                <a href="/flightbooking/airport/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Edit Airport</button>
             </div>
         </fieldset>
     </form>

@@ -87,7 +87,7 @@
 
 
 
-<div style="size: auto;padding: 5px;">
+<div style="size: auto;padding: 5px;" class="container">
 
 
     <div style="padding-top: 2em">
@@ -116,9 +116,9 @@
                 <!--th:onclick="@{document.location='/elibrary/book/edit/{bookId}'(bookId=${book.bookId})}" -->
                 <th scope="row" th:text="${iterStat.count}"></th>
                 <td th:text="${airline.airlineName}"></td>
-                <td><a th:href="@{'/flightbooking/flight/edit/{airlineId}'(airlineId=${airline.airlineId})}">Edit</a></td>
+                <td><a th:href="@{'/flightbooking/airline/edit/{airlineId}'(airlineId=${airline.airlineId})}">Edit</a></td>
                 <td>
-                    <a  th:href="@{'/flightbooking/flight/delete/' + ${airline.airlineId}}">Delete</a>
+                    <a  th:href="@{'/flightbooking/airline/delete/' + ${airline.airlineId}}">Delete</a>
                 </td>
             </tr>
             </tbody>
