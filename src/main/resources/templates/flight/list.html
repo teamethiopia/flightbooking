@@ -110,10 +110,11 @@
                 <th scope="col" >Airline</th>
                 <th scope="col" >From</th>
                 <th scope="col" >To</th>
-                <th scope="col">Airplane</th>
-                <th scope="col">Date</th>
-                <th scope="col">Departure</th>
-                <th scope="col">Arrival</th>
+                <th scope="col">DepartureDate</th>
+                <th scope="col">DepartureTime</th>
+                <th scope="col">ArrivalDate</th>
+                <th scope="col">ArrivalTime</th>
+                <th scope="col">Fare</th>
                 <th scope="col">&nbsp;</th>
                 <th scope="col">&nbsp;</th>
             </tr>
@@ -126,10 +127,11 @@
                 <td th:text="${flight.airline.airlineName}"></td>
                 <td th:text="${flight.origin.airportCity}"></td>
                 <td th:text="${flight.destination.airportCity}"></td>
-                <td th:text="${flight.airplane.airplaneModel}"></td>
-                <td th:text="${flight.dateOfFlight}"></td>
+                <td th:text="${flight.departureDate}"></td>
                 <td th:text="${flight.departureTime}"></td>
+                <td th:text="${flight.arrivalDate}"></td>
                 <td th:text="${flight.arrivalTime}"></td>
+                <td th:text="${flight.fare}"></td>
                 <td><a th:href="@{'/flightbooking/flight/edit/{flightId}'(flightId=${flight.flightId})}">Edit</a></td>
                 <td>
                     <a  th:href="@{'/flightbooking/flight/delete/' + ${flight.flightId}}">Delete</a>

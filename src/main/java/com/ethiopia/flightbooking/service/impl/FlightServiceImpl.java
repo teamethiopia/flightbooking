@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 
 
 @Service
@@ -23,8 +24,8 @@ public class FlightServiceImpl implements FlightService
     }
 
     @Override
-    public Page<Flight> getSearchedFlightsPaged(int pageNo,String s) {
-        return flightRepository.findFlightByOrigin_AirportCityContains(PageRequest.of(pageNo,20),s);
+    public Page<Flight> getSearchedFlightsPaged(LocalDate date,String origin,String destination,int pageNo) {
+        return flightRepository.findByDepartureDateAndOrigin_AirportCityContainingAndDestination_AirportCityContaining(date,origin,destination,PageRequest.of(pageNo,20));
     }
 
     @Override
