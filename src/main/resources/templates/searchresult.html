@@ -120,8 +120,8 @@
                 <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.origin.airportCity}"></td>
                 <td style="vertical-align: middle;color:darkred;font-size: large;font-weight: bolder"  height="100px" >----></td>
                 <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.destination.airportCity}"></td>
-                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.departureDate} + ' ' +  '&lt;br /&gt;' + ${flight.departureTime}"></td>
-                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.arrivalDate} + ' ' + '&lt;br /&gt;' + ${flight.arrivalTime}"></td>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:utext="${flight.departureDate} + ' ' +  '</br>' + ${flight.departureTime}"></td>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:utext="${flight.arrivalDate} + ' ' + '</br>' + ${flight.arrivalTime}"></td>
                 <td style="vertical-align: middle;color:black;font-size: large;font-weight: bolder"  height="100px" ><a  style="padding: 30px" class="btn btn-primary btn-lg" href="/flightbooking/booking/new">Select Flight</a></td>
             </tr>
 
