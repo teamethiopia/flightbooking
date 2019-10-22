@@ -1,45 +1,32 @@
 package com.ethiopia.flightbooking.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
-@Entity
-@Table(name = "airport")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Data
-public class Airport {
+@Entity
+@Table(name = "airports")
+public class Airport
+{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer airportId;
 
-    @NotEmpty
-    private String airportCode;
-
-
-    @NotEmpty
-    private String city;
-
-    @NotEmpty
-    private String country;
-    @NotEmpty
+    @Column(name = "airportname")
     private String airportName;
 
-    @OneToMany(mappedBy = "destination")
-    @OrderBy("arrivalDate, arrivalTime")
-    List<Flight> arrivals;
+    @Column(name = "airportcode")
+    private String airportCode;
 
-    @OneToMany(mappedBy = "origin")
-    @OrderBy("departureDate, departureTime")
-    List<Flight> departures;
+    @Column(name = "airportcity")
+    private String airportCity;
+
 
 
 }

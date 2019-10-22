@@ -1,39 +1,43 @@
 package com.ethiopia.flightbooking.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
-@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name ="airplane")
-@ToString
-public class Airplane {
+@AllArgsConstructor
+@Entity
+@Table(name = "airplanes")
+public class Airplane
+{
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer airplaneId;
 
-    @NotEmpty
-    private String serialNumber;
+    @Column(name = "airplaneserialnumber")
+    private String airplaneSerialNumber;
 
-    @NotEmpty
-    private String model;
+    @Column(name = "airplanemodel")
+    private String airplaneModel;
 
-    @Range(min = 0, max = 800)
-    private int capacity;
+    @Column(name = "firstclassseats")
+    private int firstClassSeats;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "airplane")
-    @OrderBy("departureDate, departureTime")
-    private List<Flight> flights;
+    @Column(name = "businessclassseats")
+    private int businessClassSeats;
+
+    @Column(name = "economyslassseats")
+    private int economyClassSeats;
+
+
+
+
+
 
 }

@@ -1,35 +1,38 @@
 package com.ethiopia.flightbooking.model;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
-@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "passenger")
+@AllArgsConstructor
+@Entity
+@Table(name = "passengers")
 public class Passenger {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
 
     @NotEmpty
+    @Column(name = "firstname")
     private String firstName;
 
     @NotEmpty
+    @Column(name = "lastname")
     private String lastName;
 
+    @Column(name = "username")
+    private String userName;
 
-    private int passportNumber;
-
-    @OneToMany
-    List<Booking> bookings;
+    @Column(name = "password")
+    private String passWord;
 
 
 }
-

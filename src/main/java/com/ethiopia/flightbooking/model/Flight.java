@@ -1,74 +1,54 @@
 package com.ethiopia.flightbooking.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-@Entity
 @Data
-@ToString
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "flight")
-public class Flight {
-
+@AllArgsConstructor
+@Entity
+@Table(name = "flights")
+public class Flight
+{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer flightId;
 
-    @NotEmpty
-    private String flightnr;
+    @Column(name = "flightnumber")
+    private String flightNumber;
 
-    @NotNull
-    @Future
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-dd-MM")
-    private Date departureDate;
-
-    @NotNull
-    @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
-    private Date departureTime;
-
-    @NotNull
-    @Future
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-dd-MM")
-    private Date arrivalDate;
-
-    @NotNull
-    @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
-    private Date arrivalTime;
-
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Airline airline;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Airport origin;
 
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Airport destination;
 
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST) // Many flights can have the same airplane multiplexed by time.
     private Airplane airplane;
 
+    @Column(name = "dateofflight")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfFlight;
 
-    @OneToMany
-    private List<Booking> bookings;
+    @Column(name = "departuretime")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime departureTime;
+
+    @Column(name = "arrivaltime")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime arrivalTime;
+
+
+
 
 
 }
