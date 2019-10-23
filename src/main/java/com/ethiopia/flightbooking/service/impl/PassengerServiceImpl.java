@@ -6,9 +6,7 @@ import com.ethiopia.flightbooking.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
 
-@Service
 public class PassengerServiceImpl implements PassengerService
 {
     @Autowired

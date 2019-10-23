@@ -1,71 +1,180 @@
 package com.ethiopia.flightbooking.controller;
 
 
+import com.ethiopia.flightbooking.dto.Bookingdto;
 import com.ethiopia.flightbooking.model.*;
-import com.ethiopia.flightbooking.service.*;
+import com.ethiopia.flightbooking.service.BookingService;
+import com.ethiopia.flightbooking.service.FlightService;
+import com.ethiopia.flightbooking.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
+import javax.mail.internet.MimeMessage;
+import java.time.LocalDateTime;
 
 @Controller
 public class BookingController
 {
+
     @Autowired
     FlightService flightService;
 
-   @Autowired
-    PassengerService passengerService;
+    @Autowired
+    BookingService bookingService;
 
     @Autowired
-    AirlineService airlineService;
+    NotificationService notificationService;
 
-    @Autowired
-    AirportService airportService;
 
-    @Autowired
-    AirplaneService airplaneService;
+//    @GetMapping(value = {"/flightbooking/booking/new/{flightId}"})
+//    public ModelAndView displayNewBookingForm(@PathVariable Integer flightId,@ModelAttribute("flightdto") Flightdto flightdto)
+//    {
+//        ModelAndView mav = new ModelAndView();
+//        Flight flight = flightService.getFlightById(flightId);
+//        Booking booking  = new Booking();
+//        User user = new User();
+//
+//        if (flight != null) {
+//            mav.addObject("flightdto",flightdto);
+//            mav.addObject("booking",booking);
+//            mav.addObject("flight",flight);
+//            mav.addObject("user",user);
+//            mav.setViewName("booking/new");
+//            return mav;
+//        }
+//        mav.setViewName("searchresult");
+//        return mav;
+//    }
 
-    @GetMapping(value = {"","/","/book"})
-    public String getFlights(Model model){
-        model.addAttribute("flights", flightService.findAll());
-        return "booking/index";
-    }
 
-    @GetMapping(value = {"/flightbooking/booking/new"})
-    public String bookingForm(@ModelAttribute("passenger") Passenger passenger, @RequestParam("id") int id, Model model){
-        //System.out.println(id);
-        model.addAttribute("flightId", id);
-        return "booking/new";
-    }
-    @PostMapping(value = "/flightbooking/booking/new")
-    public String doBooking( Passenger passenger, BindingResult bindingResult, @RequestParam("flightId") String id,
-                             Model model, RedirectAttributes redirectAttributes){
-        if(bindingResult.hasErrors()){
-            model.addAttribute("errors", bindingResult.getAllErrors());
+
+//    @GetMapping(value = {"/flightbooking/booking/new/{flightId}/{flightCount}/{adult}/{children}/{flightClass}"})
+//    public String displayNewBookingForm(@PathVariable Integer flightId,@PathVariable String flightCount,
+//                                        @PathVariable Integer adult,@PathVariable Integer children,
+//                                        @PathVariable FlightClass flightClass
+//                                         ,Model model)
+//    {
+//        Flight flight = flightService.getFlightById(flightId);
+//        Booking booking  = new Booking();
+//        booking.setFlightCount(flightCount);
+//        booking.setAdult(adult);
+//        booking.setChildren(children);
+//        booking.setFlightClass(flightClass);
+//        User user = new User();
+//
+////        Flightdto flightdto = new Flightdto();
+////        flightdto.setAdult(adult);
+////        flightdto.setChildren(children);
+////        flightdto.setFlightClass(flightClass);
+////        flightdto.setFlightCount(flightCount);
+//
+//
+//        if (flight != null) {
+////            model.addAttribute("flightdto",flightdto);
+//            model.addAttribute("booking",booking);
+//            model.addAttribute("flight",flight);
+//            model.addAttribute("user",user);
+//            return "booking/new";
+//        }
+//        return "searchresult";
+//    }
+
+
+
+
+
+
+    @GetMapping(value = {"/flightbooking/booking/new/{flightId}/{flightCount}/{adult}/{children}/{flightClass}"})
+    public String displayNewBookingForm(@PathVariable Integer flightId,@PathVariable String flightCount,
+                                       @PathVariable Integer adult,@PathVariable Integer children,
+                                      @PathVariable FlightClass flightClass
+                                       ,Model model)
+    {
+        Flight flight = flightService.getFlightById(flightId);
+
+        if (flight != null) {
+            Bookingdto bookingdto = new Bookingdto();
+            bookingdto.setDepartingFlight(flight);
+            bookingdto.setAdult(adult);
+            bookingdto.setChildren(children);
+            bookingdto.setFlightClass(flightClass);
+            bookingdto.setFlightCount(flightCount);
+
+            model.addAttribute("bookingdto",bookingdto);
+
             return "booking/new";
         }
-        //model.addAttribute("passenger", passengerService.savePassenger(passenger));
-        redirectAttributes.addFlashAttribute("passenger", passengerService.savePassenger(passenger));
-        System.out.println(id);
-        redirectAttributes.addFlashAttribute("flight", flightService.findOne(Integer.parseInt(id)));
-       // model.addAttribute("flight", flightService.findOne(id));
-       // List<Booking> bookings= passenger.getBookings();
-        //System.out.println("passengerService.savePassenger(passenger).toString()");
+        return "searchresult";
+    }
 
-        return "redirect:/flightbooking/booking/detail";
+
+
+
+
+
+
+
+
+
+
+    @PostMapping(value = {"/flightbooking/booking/success"})
+    public String AcceptNewBookingForm(@ModelAttribute("bookingdto") Bookingdto bookingdto,
+                                       Model model,BindingResult bindingResult)
+    {
+
+        if(bindingResult.hasErrors())
+        {
+            model.addAttribute("bookingdto",bookingdto);
+
+            return "booking/new";
+        }
+
+        Booking booking = new Booking();
+        User user = new User();
+
+        user.setFirstName(bookingdto.getFirstName());
+        user.setLastName(bookingdto.getLastName());
+        user.setUserName(bookingdto.getUserName());
+
+
+
+        booking.setUser(user);
+        booking.setDepartingFlight(bookingdto.getDepartingFlight());
+        booking.setDateAndTimeOfBooking(LocalDateTime.now());
+
+        booking.setAdult(bookingdto.getAdult());
+        booking.setChildren(bookingdto.getChildren());
+        booking.setFlightCount(bookingdto.getFlightCount());
+        booking.setFlightClass(bookingdto.getFlightClass());
+        booking.setConfirmationCode(bookingService.randomAlphaNumeric(20));
+
+        String body = "Dear "+booking.getUser().getFirstName()+"\n"+"Thank you For Choosing US!!!" + "\n" + "Your Booking Confirmation number is : " + booking.getConfirmationCode() + "\n" ;
+
+        notificationService.sendNotification("dawitgirma00@gmail.com",user.getUserName(),body,"Booking confirmation");
+
+
+
+        booking = bookingService.saveBooking(booking);
+
+
+        return "booking/success";
+
+
     }
-    @GetMapping("/flightbooking/booking/detail")
-    public String details() {
-        return "booking/detail";
-    }
+
+
+
+
+
+
+
+
+
+
 
 }

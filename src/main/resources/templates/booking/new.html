@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +16,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="/static/css/SearchPageStyle.css" />
+    <link type="text/css" rel="stylesheet" href="/css/BookingPageStyle.css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,20 +49,20 @@
 
             <ul class="navbar-nav mr-auto">
 
+                <!--                border-left: white 3px solid;-->
+
                 <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">
-                    <span style="color:yellow; padding-left: 2em; padding-right: 1em;height: 50%">Welcome passenger</span>
+                    <span style="color:yellow; padding-left: 2em; padding-right: 1em;">Booking Form</span>
                 </li>
             </ul>
-<!--            <ul class="navbar-nav mr-auto">-->
-
-
-<!--                <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">-->
-<!--                    <a class="nav-link" href="/flightbooking/flight/list">Flight search result</a>-->
-<!--                </li >-->
-<!--            </ul>-->
 
             <form class="form-inline my-2 my-lg-0">
-                <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">Back</a>
+
+                <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">My Bookings</a>
+
+                <a th:href="@{/flightbooking/signup}" class="btn btn-success btn-lg" type="button">Register !</a>
+
+                <a th:href="@{/flightbooking/flight/list}" class="btn btn-success btn-lg" type="button">Admin Portal</a>
             </form>
 
 
@@ -81,119 +80,201 @@
 
 
 
-<div style="size: auto;padding: 5px;" class="container">
+
+
+
+
+<div  style="size: auto;padding: 40px">
+
+
+
+<div class="booking-form">
+
+
+
+
+
+<form id="newBookForm" method="post" action="/flightbooking/booking/success" th:object="${bookingdto}">
+<fieldset>
+    <input type="hidden" name="adult" th:value="${bookingdto.adult}"/>
+    <input type="hidden" name="children" th:value="${bookingdto.children}"/>
+    <input type="hidden" name="flightCount" th:value="${bookingdto.flightCount}"/>
+    <input type="hidden" name="flightClass" th:value="${bookingdto.flightClass}"/>
+    <input type="hidden" name="departingFlight" th:value="${bookingdto.departingFlight.flightId}"/>
+
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="fn">FirstName:</label>
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                      class="alert alert-danger"></span>
+                <input style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px" id="fn" name="firstName" type="text" class="form-control" required
+                       th:value="${bookingdto.firstName}">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="lastName">LastName:</label>
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                      class="alert alert-danger"></span>
+                <input style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px" id="lastName" name="lastName" type="text" class="form-control" required
+                       th:value="${bookingdto.lastName}">
+            </div>
+        </div>
+
+    </div>
+
+
+
+        <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="userName">Email:</label>
+                <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
+                      class="alert alert-danger"></span>
+                <input style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px" id="userName" name="userName" type="email" class="form-control" required
+                       th:value="${bookingdto.userName}">
+            </div>
+        </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
 
 
     <div style="padding-top: 2em">
-        <span style="font-size: 2em; color: #32a5e7;">Passenger input Form</span>
+    <span style="font-size: 2em; color: #32a5e7;">payment method</span>
+</div>
+    <br>
+    <div class="form-group row">
+        <label for="fullName" class="col-sm-2 col-form-label">Full Name on card:</label>
+        <div class="col-sm-10">
+            <input style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px" type="text" class="form-control" id="fullName" name="fullName" placeholder="please input your full name which appears on your card">
+        </div>
     </div>
-    <p>&nbsp;</p>
 
-    <form id="newBookForm" method="post" th:action="@{/flightbooking/booking/new(flightId=${flightId})}" th:object="${passenger}">
-        <fieldset>
-            <input type="hidden" name="flightId" th:value="${passenger.id}"/>
-
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="fn">First Name</label>
-                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-                              class="alert alert-danger"></span>
-                        <input id="fn"  type="text" class="form-control"
-                               th:field="*{firstName}">
-                    </div>
-                </div>
-
+    <div class="form-group row">
+        <label for="paywith" class="col-sm-2 col-form-label"> how would you like to pay with?</label>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <label class="form-check-label" for="paywith">
+                    <input style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px"  class="form-check-input" type="radio" id="paywith" name="payment" value="Pay In paypal" checked>
+                    pay with paypal
+                </label>
             </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="lastN">Last Name</label>
-                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                              class="alert alert-danger"></span>
-                        <input id="lastN"  type="text" class="form-control"
-                               th:filed="*{lastName}">
-                    </div>
-                </div>
+            <div class="form-check">
+                <label class="form-check-label" for="card">
+                    <input style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px" class="form-check-input" type="radio" name="payment" id="card" value="Card">
+                    Card
+                </label>
             </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="cn" class="col-sm-2 col-form-label">Debit card number:</label>
+        <div class="col-sm-10">
+            <input style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px" type="text" class="form-control" id="cn" name="cardNumber" placeholder="Card Number"  >
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="security" class="col-sm-2 col-form-label"  >Security code:</label>
+        <div class="col-sm-2">
+            <input style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px" type="text" class="form-control" id="security" name="address" placeholder="Code" maxlength="3" pattern="\d{3}">
 
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="userName">Email</label>
-                        <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
-                              class="alert alert-danger"></span>
-                        <input id="userName" type="text" class="form-control"
-                               th:field="*{userName}">
-                    </div>
-
-                </div>
-
-
-                <br>
-
+        </div>
+    </div>
 
 
 
-            </div>
 
-            <div style="padding-top: 2em">
-                <span style="font-size: 2em; color: #32a5e7;">payment method</span>
-            </div>
-            <br>
-            <div class="form-group row">
-                <label for="fullName" class="col-sm-2 col-form-label">Full Name on card:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="fullName" name="fullName" placeholder="please input your full name which appears on your card" value="name" required>
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="address" class="col-sm-2 col-form-label"> how would you like to pay with?</label>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <label class="form-check-label" for="paywith">
-                            <input class="form-check-input" type="radio" id="paywith" name="payment" value="Pay In paypal" checked>
-                            pay with paypal
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label" for="card">
-                            <input class="form-check-input" type="radio" name="payment" id="card" value="Card">
-                            Card
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="address" class="col-sm-2 col-form-label">Debit card number:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="card number" required>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="comment" class="col-sm-2 col-form-label"  >Security code:</label>
-                <div class="col-sm-1">
-                    <label cols="10" rows="10" class="form-control" id="comment" name="" placeholder="Security Code"></label>
-                </div>
-            </div>
-            <div class="form-group row">
-            </div>
 
-            <div style="float:right;">
-                <a href="/flightbooking/flight/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Book</button>
-            </div>
-        </fieldset>
-    </form>
+
+
+
+
+
+
+
+    <div style="margin: auto;width: 100%;">
+        <button style="padding-left: 40px;padding-right: 40px;padding-bottom: 20px;padding-top: 20px;" id="btnSubmit" type="submit" class="btn btn-success btn-lg">Book!</button>
+    </div>
+
+</fieldset>
+
+</form>
+
+
+
+
+
+
 
 
 
 </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

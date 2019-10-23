@@ -35,9 +35,14 @@ public class Flight
     @ManyToOne(cascade = CascadeType.PERSIST) // Many flights can have the same airplane multiplexed by time.
     private Airplane airplane;
 
-    @Column(name = "dateofflight")
+    @Column(name = "departuredate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfFlight;
+    private LocalDate departureDate;
+
+    @Column(name = "arrivaldate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate arrivalDate;
+
 
     @Column(name = "departuretime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
@@ -47,12 +52,8 @@ public class Flight
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime arrivalTime;
 
-    @Column(name = "arrivaldate")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime arrivalDate  ;
-
-
-
+    @Column(name = "fare")
+    private Double fare;
 
 
 }

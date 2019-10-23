@@ -50,9 +50,11 @@ public class FlightController
         return modelAndView;
     }
 
+
+
     @PostMapping(value = {"/flightbooking/flight/search"})
     public String searchFlight(@ModelAttribute("flightdto") Flightdto flightdto,
-                             BindingResult bindingResult, Model model,@RequestParam(defaultValue = "0") int pageNo) {
+                              Model model,@RequestParam(defaultValue = "0") int pageNo) {
 
         System.out.println(flightdto.getFlightCount());
         System.out.println(flightdto.getFlightClass());
@@ -63,9 +65,35 @@ public class FlightController
         System.out.println(flightdto.getDateOfDeparture());
         System.out.println(flightdto.getDateOfReturn());
 
-      //  model.addAttribute("flights",flightService.getSearchedFlightsPaged(pageNo,flight.getFlightNumber()));
+        model.addAttribute("currentPageNo", pageNo);
+        model.addAttribute("flightdto", flightdto);
+        model.addAttribute("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
         return "searchresult";
     }
+
+
+
+
+//    @GetMapping(value = {"/flightbooking/flight/search"})
+//    public ModelAndView searchFlight(@ModelAttribute("flightdto") Flightdto flightdto,
+//                              @RequestParam(defaultValue = "0") int pageNo) {
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("currentPageNo", pageNo);
+//        if(flightdto.getDateOfDeparture() == null)
+//        {
+//           System.out.println("22222222222222222222222222222222222222222222222222222222222222222222222222222");
+//        }
+//        mav.addObject("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
+//        mav.setViewName("searchresult");
+//        // model.addAttribute("currentPageNo", pageNo);
+//        //model.addAttribute("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
+//        return mav;
+//    }
+
+
+
+
+
 
 
 

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="/css/SearchPageStyle.css" />
+    <link type="text/css" rel="stylesheet" href="/css/SearchResultPageStyle.css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,7 +62,7 @@
 
                 <a th:href="@{/flightbooking/signup}" class="btn btn-success btn-lg" type="button">Register !</a>
 
-                <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">Admin Portal</a>
+                <a th:href="@{/flightbooking/flight/list}" class="btn btn-success btn-lg" type="button">Admin Portal</a>
             </form>
 
 
@@ -79,10 +79,10 @@
 
 
 
+<!--class="container"-->
+<div style="size: auto;padding-top: 5px;padding-left: 20px;padding-right: 20px;"  >
 
-<div class="container" style="size: auto">
-
-    <div class="search_result_list">
+<!--    <div class="search_result_list">-->
 
         <div>
             <span style="font-size: 1.5em">Search Results</span>
@@ -93,11 +93,16 @@
         <table class="table table-hover">
             <thead>
             <tr>
-<!--                <th scope="col">#</th>-->
-<!--                <th scope="col">Account Number</th>-->
-<!--                <th scope="col">Customer</th>-->
-<!--                <th scope="col">Type of Account</th>-->
-<!--                <th scope="col">Balance</th>-->
+                <th scope="col">#</th>
+                <th scope="col">Airline</th>
+                <th scope="col">Flight Number</th>
+                <th scope="col">origin</th>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">destination</th>
+                <th scope="col">Departing</th>
+                <th scope="col">Arriving</th>
+                <th scope="col">Price</th>
+                <th scope="col">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
@@ -108,21 +113,31 @@
                                         });
              -->
             <!--<tr class="datarow" th:each="product,iterStat : ${products}" th:onclick="@{document.location='/prodmgmt/products/edit/{productId}'(productId=${product.productId})}">-->
-            <tr class="datarow" th:each="flight,iterStat : ${flights}" th:onclick="@{document.location='flightbooking/home'}">
 
-                <th scope="row" th:text="${iterStat.count}+'.'"></th>
-                <td th:text="${account.accountNumber}"></td>
-                <td th:text="${account.customer.customerNumber}+' - '+${account.customer.firstName}+' '+${account.customer.middleName}+' '+${account.customer.lastName}"></td>
-                <td th:text="${account.accountType.accountTypeName}"></td>
-                <td th:text="${#numbers.formatCurrency(account.balance)}"></td>
+            <tr class="datarow"  bgcolor="#D87272" th:each="flight,iterStat : ${flights}">
+                <th style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" scope="row" th:text="${iterStat.count}+'.'"></th>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.airline.airlineName}"></td>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.flightNumber}"></td>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.origin.airportCity}"></td>
+                <td style="vertical-align: middle;color:darkred;font-size: large;font-weight: bolder"  height="100px" >----></td>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.destination.airportCity}"></td>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:utext="${flight.departureDate} + ' ' +  '</br>' + ${flight.departureTime}"></td>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:utext="${flight.arrivalDate} + ' ' + '</br>' + ${flight.arrivalTime}"></td>
+                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${#numbers.formatCurrency(flight.fare)}"></td>
+                <td style="vertical-align: middle;color:black;font-size: large;font-weight: bolder"  height="100px" ><a  style="padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px" class="btn btn-primary btn-lg" th:href="@{'/flightbooking/booking/new/{flightId}/{flightCount}/{adult}/{children}/{flightClass}'(flightId=${flight.flightId},flightCount=${flightdto.flightCount},adult=${flightdto.adult},children=${flightdto.children},flightClass=${flightdto.flightClass})}">Select Flight</a></td>
             </tr>
 
+            <div th:unless="${not #lists.isEmpty(flights.content)}">
+
+                <tr style="background: rgba(0, 0, 0, 0.3);">
+                    <td th:colspan="9" th:rowspan="3" style="padding-top:2em;padding-bottom:1em;color: white;font-weight: bold;font-size: xx-large;" th:text="'No Flights Found'"></td>
+                    <td th:colspan="1" th:rowspan="3"><a  style="padding: 30px" class="btn btn-primary btn-lg" href="/flightbooking/home">Search Again</a></td>
+                </tr>
+
+            </div>
 
 
 
-            <tr style="background-color: #dedede;">
-                <td th:colspan="5" style="padding-top:2em;padding-bottom:1em;text-decoration:none;font-weight: bold;font-size: xx-large;" th:text="'Net Liquidity: '+${#numbers.formatCurrency(netliquidity)}"></td>
-            </tr>
             </tbody>
 
 
@@ -130,12 +145,26 @@
 
 
 
+<!--        &lt;!&ndash; Pagination &ndash;&gt;-->
+<!--        <div>-->
+<!--            <ul class="pagination">-->
+<!--                <li class="page-item disabled">-->
+<!--                    <a class="page-link" href="#">Pages: </a>-->
+<!--                </li>-->
+<!--                <li th:each="i : ${#numbers.sequence(1, flights.totalPages)}"-->
+<!--                    th:class="${currentPageNo}==${i-1}?'page-item active':'page-item'">-->
+<!--                    <a  th:href="@{/flightbooking/flight/search(pageNo=${i-1})}"-->
+<!--                       th:text="${i}" class = "page-link"></a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
 
 
 
 
 
-    </div>
+
+<!--    </div>-->
 
 
 

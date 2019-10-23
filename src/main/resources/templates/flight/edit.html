@@ -141,7 +141,7 @@
 
 
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="airline">Airline Operator</label>
                         <span th:if="${#fields.hasErrors('airline')}" th:errors="*{airline}"
@@ -152,7 +152,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="airplane">Airplane</label>
                         <span th:if="${#fields.hasErrors('airplane')}" th:errors="*{airplane}"
@@ -161,6 +162,16 @@
                             <option value="">Select the Airplane please</option>
                             <option th:each="airplane : ${airplanes}" th:value="${airplane.airplaneId}" th:text="${airplane.airplaneModel}"></option>
                         </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="fare">Fare</label>
+                        <span th:if="${#fields.hasErrors('fare')}" th:errors="*{fare}"
+                              class="alert alert-danger"></span>
+                        <input id="fare" name="fare" type="number" class="form-control"
+                               th:value="${flight.fare}">
                     </div>
                 </div>
 
@@ -176,27 +187,36 @@
             <div class="row">
 
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label for="date">Date of flight</label>
-                        <span th:if="${#fields.hasErrors('dateOfFlight')}" th:errors="*{dateOfFlight}"
+                        <label for="departureDate">Departure Date</label>
+                        <span th:if="${#fields.hasErrors('departureDate')}" th:errors="*{departureDate}"
                               class="alert alert-danger"></span>
-                        <input id="date" name="dateOfFlight" type="date" class="form-control"
-                               th:value="${flight.dateOfFlight}">
+                        <input id="departureDate" name="departureDate" type="date" class="form-control"
+                               th:value="${flight.departureDate}">
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="dt">Departure Time</label>
                         <span th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}"
                               class="alert alert-danger"></span>
-                        <input id="dt" name="dateOfFlight" type="time" class="form-control"
+                        <input id="dt" name="departureTime" type="time" class="form-control"
                                th:value="${flight.departureTime}">
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="arrivalDate">Arrival Date</label>
+                        <span th:if="${#fields.hasErrors('arrivalDate')}" th:errors="*{arrivalDate}"
+                              class="alert alert-danger"></span>
+                        <input id="arrivalDate" name="arrivalDate" type="date" class="form-control"
+                               th:value="${flight.arrivalDate}">
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="at">Arrival Time</label>
                         <span th:if="${#fields.hasErrors('arrivalTime')}" th:errors="*{arrivalTime}"
@@ -206,12 +226,7 @@
                     </div>
                 </div>
 
-
-
-
             </div>
-
-
 
             <div style="float:right;">
                 <a href="/flightbooking/flight/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;

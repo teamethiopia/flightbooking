@@ -6,11 +6,9 @@ import com.ethiopia.flightbooking.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
 
 
 @Service
@@ -26,8 +24,8 @@ public class FlightServiceImpl implements FlightService
     }
 
     @Override
-    public Page<Flight> getSearchedFlightsPaged(int pageNo,String s) {
-        return flightRepository.findFlightByOrigin_AirportCityContains(PageRequest.of(pageNo,20),s);
+    public Page<Flight> getSearchedFlightsPaged(LocalDate date,String origin,String destination,int pageNo) {
+        return flightRepository.findByDepartureDateAndOrigin_AirportCityContainingAndDestination_AirportCityContaining(date,origin,destination,PageRequest.of(pageNo,20));
     }
 
     @Override
@@ -45,16 +43,9 @@ public class FlightServiceImpl implements FlightService
         return flightRepository.save(flight);
     }
 
-    @Override
-    public Flight findOne(Integer id) {
-        Optional<Flight> flight=flightRepository.findById(id);
-        return flight.orElse(null);
-    }
 
-    @Override
-    public List<Flight> findAll() {
-        return flightRepository.findAll(Sort.by("flightId"));
-    }
+
+
 
 
 }
