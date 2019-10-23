@@ -33,11 +33,12 @@
 
 
 
-<div class="container">
+<div >
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
 
-        <a class="navbar-brand" th:href="@{/flightbooking/home}">Home</a>
+<!--        <a class="navbar-brand" th:href="@{/flightbooking/home}">Home</a>-->
+        <a th:href="@{/flightbooking/home}" class="btn btn-success btn-lg" type="button">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -46,31 +47,152 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <div class="row">
-
             <ul class="navbar-nav mr-auto">
 
-                <div class="float-right">
+<!--                border-left: white 3px solid;-->
 
+                <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">
                     <span style="color:yellow; padding-left: 2em; padding-right: 1em;">Welcome !</span>
-
-                    <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">Sign In !</a>
-
-                    <a th:href="@{/flightbooking/signup}" class="btn btn-success btn-lg" type="button">Register !</a>
-
-
-                </div>
-
+                </li>
             </ul>
 
-            </div>
+            <form class="form-inline my-2 my-lg-0">
+
+                <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">My Bookings</a>
+
+                <a th:href="@{/flightbooking/signup}" class="btn btn-success btn-lg" type="button">Register !</a>
+
+                <a th:href="@{/flightbooking/flight/list}" class="btn btn-success btn-lg" type="button">Admin Portal</a>
+            </form>
+
+
+
+
 
         </div>
     </nav>
 
+</div>
 
 
 
+
+
+
+
+<div class="container" style="size: auto">
+
+
+
+    <div class="booking-form">
+
+    <form  id="searchflightform" method="post" action="/flightbooking/flight/search" th:object="${flightdto}">
+
+        <fieldset>
+        <div >
+            <div style="font-size: xx-large">
+                <label for="one-way" style="color: darkred;">
+                    <input type="radio" id="one-way"  name="flightCount" th:value="oneWay" style="height:20px; width:20px;" >
+                    <span></span>One way
+                </label>
+                <label for="roundtrip" style="color: darkred;">
+                    <input type="radio" id="roundtrip"  name="flightCount" th:value="roundTrip" style="height:20px; width:20px;">
+                    <span ></span>Roundtrip
+                </label>
+            </div>
+        </div>
+
+
+
+        <div class="row"  >
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="form-label" style="color: white;">Flying from</span>
+                    <input class="form-control" name="from" th:value="${flightdto.from}" required type="text" placeholder="City or airport" style="background: rgba(0, 0, 0, 0.6);color: white; border-radius: 25px; height: 50px">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="form-label" style="color: white;">Flying to</span>
+                    <input class="form-control" name="to" th:value="${flightdto.to}" required type="text" placeholder="City or airport" style="background: rgba(0, 0, 0, 0.6);color: white; border-radius: 25px; height: 50px">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <span class="form-label" style="color: white;">Departing</span>
+                    <input class="form-control" name="dateOfDeparture" th:value="${flightdto.dateOfDeparture}" type="date" required style="background: rgba(0, 0, 0, 0.6);color: white; border-radius: 25px; height: 50px">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <span class="form-label" style="color: white;">Returning</span>
+                    <input class="form-control" name="dateOfReturn" th:value="${flightdto.dateOfReturn}" type="date" required style="background: rgba(0, 0, 0, 0.6);color: white; border-radius: 25px; height: 50px">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group" >
+                    <span class="form-label" style="color: white;">Adults (18+)</span>
+                    <select name="adult" class="form-control"  style="background: rgba(0, 0, 0, 0.6);color: white; border-radius: 25px; height: 50px">
+                        <option th:value="1">1</option>
+                        <option th:value="2">2</option>
+                        <option th:value="3">3</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <span class="form-label" style="color: white;">Children (0-17)</span>
+
+                    <select  name="children" class="form-control" style="background: rgba(0, 0, 0, 0.6);color: white; border-radius: 25px; height: 50px">
+                        <option   th:value="0">0</option>
+                        <option   th:value="1">1</option>
+                        <option   th:value="2">2</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row">
+
+
+
+                <div class="col-md-3">
+
+
+
+                    <div class="form-group">
+                        <span class="form-label" style="color: white;">Travel class</span>
+
+
+                        <select name="flightClass" class="form-control" style="background: rgba(0, 0, 0, 0.6); color: white; border-radius: 25px; height: 50px">
+                        <option  th:value="${economy}">Economy class</option>
+                        <option  th:value="${business}">Business class</option>
+                        <option  th:value="${first}">First class</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+
+                <div style="float: right; padding-left: 200px;padding-top: 30px;">
+                    <button type="submit" class="btn btn-success btn-lg">Show flights</button>
+                 </div>
+
+
+
+        </div>
+
+
+    </fieldset>
+    </form>
 
 
 </div>
@@ -82,8 +204,48 @@
 
 
 
+<!--    &lt;!&ndash;<div class="row" >&ndash;&gt;-->
+
+<!--    <div>-->
+<!--        <img  class="rounded float-left" th:src="@{/gif/gif3.gif}" alt="this slowpoke moves"  height=170px width=250px/>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>&ndash;&gt;-->
+<!--        <div >-->
+<!--            <img  class="rounded mx-auto d-block"  th:src="@{/gif/gif4.gif}" alt="this slowpoke moves"  height=170px width=250px />-->
+<!--        </div>-->
+<!--    &lt;!&ndash;    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>&ndash;&gt;-->
+<!--    <div>-->
+<!--        <img class="rounded mx-auto d-block"  th:src="@{/gif/gif9.gif}" alt="this slowpoke moves"  height=170px width=250px/>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;</div>&ndash;&gt;-->
 
 
+    <div class="image123">
+        <div class="imgContainer">
+            <img  th:src="@{/gif/gif3.gif}" alt="this slowpoke moves"  height=170px width=370px/>
+        </div>
+        <div class="imgContainer">
+            <img  th:src="@{/gif/gif4.gif}" alt="this slowpoke moves"  height=170px width=370px />
+        </div>
+        <div class="imgContainer">
+            <img  th:src="@{/gif/gif9.gif}" alt="this slowpoke moves"  height=170px width=370px/>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
 
 
 

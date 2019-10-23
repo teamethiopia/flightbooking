@@ -6,7 +6,11 @@ import com.ethiopia.flightbooking.service.AirlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class AirlineServiceImpl implements AirlineService
 {
     @Autowired
@@ -15,6 +19,11 @@ public class AirlineServiceImpl implements AirlineService
     @Override
     public Page<Airline> getAllAirlinesPaged(int pageNo) {
         return airlineRepository.findAll(PageRequest.of(pageNo,20));
+    }
+
+    @Override
+    public List<Airline> getAllAirlinesList() {
+        return airlineRepository.findAll();
     }
 
     @Override
