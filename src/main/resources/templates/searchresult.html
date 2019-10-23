@@ -124,7 +124,7 @@
                 <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:utext="${flight.departureDate} + ' ' +  '</br>' + ${flight.departureTime}"></td>
                 <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:utext="${flight.arrivalDate} + ' ' + '</br>' + ${flight.arrivalTime}"></td>
                 <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${#numbers.formatCurrency(flight.fare)}"></td>
-                <td style="vertical-align: middle;color:black;font-size: large;font-weight: bolder"  height="100px" ><a  style="padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px" class="btn btn-primary btn-lg" th:href="@{'/flightbooking/booking/new/{flightId}'(flightId=${flight.flightId})}">Select Flight</a></td>
+                <td style="vertical-align: middle;color:black;font-size: large;font-weight: bolder"  height="100px" ><a  style="padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px" class="btn btn-primary btn-lg" th:href="@{'/flightbooking/booking/new/{flightId}/{flightCount}/{adult}/{children}/{flightClass}'(flightId=${flight.flightId},flightCount=${flightdto.flightCount},adult=${flightdto.adult},children=${flightdto.children},flightClass=${flightdto.flightClass})}">Select Flight</a></td>
             </tr>
 
             <div th:unless="${not #lists.isEmpty(flights.content)}">

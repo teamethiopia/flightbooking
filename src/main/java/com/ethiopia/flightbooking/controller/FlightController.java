@@ -54,17 +54,19 @@ public class FlightController
 
     @PostMapping(value = {"/flightbooking/flight/search"})
     public String searchFlight(@ModelAttribute("flightdto") Flightdto flightdto,
-                             BindingResult bindingResult, Model model,@RequestParam(defaultValue = "0") int pageNo) {
+                              Model model,@RequestParam(defaultValue = "0") int pageNo) {
 
-//        System.out.println(flightdto.getFlightCount());
-//        System.out.println(flightdto.getFlightClass());
-//        System.out.println(flightdto.getChildren());
-//        System.out.println(flightdto.getAdult());
-//        System.out.println(flightdto.getFrom());
-//        System.out.println(flightdto.getTo());
-//        System.out.println(flightdto.getDateOfDeparture());
-//        System.out.println(flightdto.getDateOfReturn());
+        System.out.println(flightdto.getFlightCount());
+        System.out.println(flightdto.getFlightClass());
+        System.out.println(flightdto.getChildren());
+        System.out.println(flightdto.getAdult());
+        System.out.println(flightdto.getFrom());
+        System.out.println(flightdto.getTo());
+        System.out.println(flightdto.getDateOfDeparture());
+        System.out.println(flightdto.getDateOfReturn());
+
         model.addAttribute("currentPageNo", pageNo);
+        model.addAttribute("flightdto", flightdto);
         model.addAttribute("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
         return "searchresult";
     }

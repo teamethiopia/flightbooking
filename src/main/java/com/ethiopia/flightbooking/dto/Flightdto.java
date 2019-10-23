@@ -26,9 +26,9 @@ public class Flightdto
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfReturn;
 
-    private int adult;
+    private Integer adult;
 
-    private int children;
+    private Integer children;
 
     private FlightClass flightClass;
 
