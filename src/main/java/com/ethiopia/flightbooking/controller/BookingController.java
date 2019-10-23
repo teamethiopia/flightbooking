@@ -20,14 +20,17 @@ public class BookingController
     FlightService flightService;
 
     @GetMapping(value = {"/flightbooking/booking/new/{flightId}"})
-    public String displayNewBookingForm(@PathVariable Integer flightId,Model model)
+    public ModelAndView displayNewBookingForm(@PathVariable Integer flightId)
     {
+        ModelAndView mav = new ModelAndView();
         Flight flight = flightService.getFlightById(flightId);
         if (flight != null) {
-            model.addAttribute("flight", flight);
-            return "booking/new";
+            mav.addObject("flight",flight);
+            mav.setViewName("booking/new");
+            return mav;
         }
-        return "searchresult";
+        mav.setViewName("searchresult");
+        return mav;
     }
 
 }
