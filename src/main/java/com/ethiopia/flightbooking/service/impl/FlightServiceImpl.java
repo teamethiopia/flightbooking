@@ -6,8 +6,11 @@ import com.ethiopia.flightbooking.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -42,9 +45,16 @@ public class FlightServiceImpl implements FlightService
         return flightRepository.save(flight);
     }
 
+    @Override
+    public Flight findOne(Integer id) {
+        Optional<Flight> flight=flightRepository.findById(id);
+        return flight.orElse(null);
+    }
 
-
-
+    @Override
+    public List<Flight> findAll() {
+        return flightRepository.findAll(Sort.by("flightId"));
+    }
 
 
 }

@@ -4,7 +4,7 @@ import com.ethiopia.flightbooking.model.Booking;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public interface BookingService
 {
     Page<Booking> getAllBookingsPaged(int pageNo);

@@ -47,6 +47,10 @@ public class Flight
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime arrivalTime;
 
+    @Column(name = "arrivaldate")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime arrivalDate  ;
+
 
 
 

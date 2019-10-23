@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,11 +21,11 @@ public class Passenger {
     @Column(name = "id")
     private Integer id;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(name = "firstname")
     private String firstName;
 
-    @NotEmpty
+   // @NotEmpty
     @Column(name = "lastname")
     private String lastName;
 
@@ -34,5 +35,7 @@ public class Passenger {
     @Column(name = "password")
     private String passWord;
 
+    @OneToMany
+    private List<Booking> bookings;
 
 }

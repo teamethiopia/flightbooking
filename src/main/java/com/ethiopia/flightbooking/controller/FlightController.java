@@ -54,14 +54,14 @@ public class FlightController
     public String searchFlight(@ModelAttribute("flightdto") Flightdto flightdto,
                              BindingResult bindingResult, Model model,@RequestParam(defaultValue = "0") int pageNo) {
 
-//        System.out.println(flightdto.getFlightCount());
-//        System.out.println(flightdto.getFlightClass());
-//        System.out.println(flightdto.getChildren());
-//        System.out.println(flightdto.getAdult());
-//        System.out.println(flightdto.getFrom());
-//        System.out.println(flightdto.getTo());
-//        System.out.println(flightdto.getDateOfDeparture());
-//        System.out.println(flightdto.getDateOfReturn());
+        System.out.println(flightdto.getFlightCount());
+        System.out.println(flightdto.getFlightClass());
+        System.out.println(flightdto.getChildren());
+        System.out.println(flightdto.getAdult());
+        System.out.println(flightdto.getFrom());
+        System.out.println(flightdto.getTo());
+        System.out.println(flightdto.getDateOfDeparture());
+        System.out.println(flightdto.getDateOfReturn());
 
       //  model.addAttribute("flights",flightService.getSearchedFlightsPaged(pageNo,flight.getFlightNumber()));
         return "searchresult";
