@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public interface FlightRepository extends JpaRepository<Flight,Integer>
 {
 
-    Page<Flight> findByDepartureDateAndOrigin_AirportCityContainingAndDestination_AirportCityContaining(LocalDate date, String origin, String destination, Pageable pageable);
+    Page<Flight> findByDepartureDateAndOrigin_AirportCityContainingAndDestination_AirportCityContaining(LocalDate date,String origin,String destination,Pageable pageable);
 
 
    // Page<Flight> findByDateOfFlightAndOrigin_AirportCityContainingAndDestination_AirportCityContaining(LocalDate date,String origin,String destination,Pageable pageable);
