@@ -24,8 +24,6 @@ public class Booking
     @Column(name = "confirmationcode")
     private String confirmationCode;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Passenger passenger;
     @NotNull
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
