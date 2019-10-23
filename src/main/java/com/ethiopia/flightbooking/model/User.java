@@ -31,4 +31,8 @@ public class User
 
     @Column(name = "password")
     private String passWord;
+
+    @Column(name = "role")
+    private Role role;
+
 }
