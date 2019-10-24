@@ -12,8 +12,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 @Configuration
 @EnableWebSecurity
 public class BasicConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
+//    @Autowired
+//    private AccessDeniedHandler accessDeniedHandler;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -24,21 +24,21 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .withUser("admin")
                 .password("{noop}admin")
-                .roles("USER","ADMIN");
+                .roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
 
-
-                .authorizeRequests().antMatchers("/flightbooking/airline/*").hasRole("ADMIN").and()
-                .authorizeRequests().antMatchers("/flightbooking/airplane/*").hasRole("ADMIN").and()
-                .authorizeRequests().antMatchers("/flightbooking/airport/*").hasRole("ADMIN")
-                .antMatchers("/flightbooking/booking/*").permitAll().and()
+                .authorizeRequests().antMatchers("/flightbooking/flight/**").hasRole("ADMIN").and()
+             //  .authorizeRequests().antMatchers("/flightbooking/flight/search").permitAll().and()
+           //     .authorizeRequests().antMatchers("/flightbooking/airplane/*").hasRole("ADMIN").and()
+             //   .authorizeRequests().antMatchers("/flightbooking/flight/search").permitAll()
+             //   .antMatchers("/flightbooking/booking/*").permitAll().and()
                 .formLogin().permitAll().and()
-                .logout().permitAll().invalidateHttpSession(true).deleteCookies("JSESSIONID").and()
-                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                .logout().permitAll().invalidateHttpSession(true).deleteCookies("JSESSIONID");
+            //     .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
