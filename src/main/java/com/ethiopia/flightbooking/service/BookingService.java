@@ -11,4 +11,6 @@ public interface BookingService
     void deleteBookingById(Integer id);
     Booking saveBooking(Booking flight);
     String randomAlphaNumeric(int count);
+    Booking getBookingByconfirmationCode(String confirmationCode);
+
 }

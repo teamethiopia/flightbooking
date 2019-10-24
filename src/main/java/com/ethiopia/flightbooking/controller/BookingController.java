@@ -7,15 +7,15 @@ import com.ethiopia.flightbooking.service.BookingService;
 import com.ethiopia.flightbooking.service.FlightService;
 import com.ethiopia.flightbooking.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.mail.internet.MimeMessage;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class BookingController
@@ -83,6 +83,41 @@ public class BookingController
 //        }
 //        return "searchresult";
 //    }
+
+
+
+
+
+
+
+
+    @GetMapping(value = "/flightbooking/booking/search")
+    public String searchbooking() {
+        return "booking/search";
+    }
+
+
+    @PostMapping(value = "/flightbooking/booking/search{confirmationCode}")
+    public ModelAndView searchbookingsubmit(@RequestParam String confirmationCode) {
+        ModelAndView mav = new ModelAndView();
+        Booking booking = bookingService.getBookingByconfirmationCode(confirmationCode);
+        mav.addObject("booking",booking);
+        System.out.println(confirmationCode);
+        mav.setViewName("booking/search");
+
+        return mav;
+    }
+
+
+    @GetMapping(value = {"/flightbooking/booking/delete/{bookingId}"})
+    public String deleteBook(@PathVariable Integer bookingId, Model model) {
+        bookingService.deleteBookingById(bookingId);
+        return "booking/search";
+    }
+
+
+
+
 
 
 

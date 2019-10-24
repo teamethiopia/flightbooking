@@ -51,4 +51,9 @@ public class BookingServiceImpl implements BookingService
 
 
     }
+
+    @Override
+    public Booking getBookingByconfirmationCode(String confirmationCode) {
+        return bookingRepository.findBookingByConfirmationCode(confirmationCode);
+    }
 }
