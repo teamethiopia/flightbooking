@@ -60,7 +60,7 @@
 
                 <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">My Bookings</a>
 
-                <a th:href="@{/flightbooking/signup}" class="btn btn-success btn-lg" type="button">Register !</a>
+                <a th:href="@{/flightbooking/user/new}" class="btn btn-success btn-lg" type="button">Register !</a>
 
                 <a th:href="@{/flightbooking/flight/list}" class="btn btn-success btn-lg" type="button">Admin Portal</a>
             </form>
@@ -145,19 +145,25 @@
 
 
 
+
+
+
+
 <!--        &lt;!&ndash; Pagination &ndash;&gt;-->
-<!--        <div>-->
-<!--            <ul class="pagination">-->
-<!--                <li class="page-item disabled">-->
-<!--                    <a class="page-link" href="#">Pages: </a>-->
-<!--                </li>-->
-<!--                <li th:each="i : ${#numbers.sequence(1, flights.totalPages)}"-->
-<!--                    th:class="${currentPageNo}==${i-1}?'page-item active':'page-item'">-->
-<!--                    <a  th:href="@{/flightbooking/flight/search(pageNo=${i-1})}"-->
-<!--                       th:text="${i}" class = "page-link"></a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
+<!--    <div>-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item disabled">-->
+<!--                <a class="page-link" href="#">Pages: </a>-->
+<!--            </li>-->
+
+<!--            <li th:each="i : ${#numbers.sequence(1, flights.totalPages)}"-->
+<!--                th:class="${currentPageNo}==${i-1}?'page-item active':'page-item'">-->
+<!--                <a  th:href="@{/flightbooking/flight/search(pageNo=${i-1},from=${flightdto})}"-->
+<!--                    th:text="${i}" class = "page-link"></a>-->
+<!--            </li>-->
+
+<!--        </ul>-->
+<!--    </div>-->
 
 
 

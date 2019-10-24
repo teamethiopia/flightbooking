@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -74,21 +75,7 @@ public class FlightController
 
 
 
-//    @GetMapping(value = {"/flightbooking/flight/search"})
-//    public ModelAndView searchFlight(@ModelAttribute("flightdto") Flightdto flightdto,
-//                              @RequestParam(defaultValue = "0") int pageNo) {
-//        ModelAndView mav = new ModelAndView();
-//        mav.addObject("currentPageNo", pageNo);
-//        if(flightdto.getDateOfDeparture() == null)
-//        {
-//           System.out.println("22222222222222222222222222222222222222222222222222222222222222222222222222222");
-//        }
-//        mav.addObject("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
-//        mav.setViewName("searchresult");
-//        // model.addAttribute("currentPageNo", pageNo);
-//        //model.addAttribute("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
-//        return mav;
-//    }
+
 
 
 
