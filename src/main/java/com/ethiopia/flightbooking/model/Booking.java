@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,18 +19,19 @@ public class Booking
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Integer bookingId;
 
     @Column(name = "confirmationcode")
     private String confirmationCode;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Passenger passenger;
+    @NotNull
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Flight departingFlight;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Flight returningFlight;
 
     @Column(name = "dateandtimeofbooking")
@@ -38,9 +41,13 @@ public class Booking
     private FlightClass flightClass;
 
     @Column(name = "adult")
-    private int adult;
+    @Digits(integer = 9, fraction = 0)
+    private Integer adult;
     @Column(name = "children")
-    private int children;
+    @Digits(integer = 9, fraction = 0)
+    private Integer children;
+    @Column(name = "flightcount")
+    private String flightCount;
 
 
 }
