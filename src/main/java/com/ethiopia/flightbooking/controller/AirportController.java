@@ -1,6 +1,5 @@
 package com.ethiopia.flightbooking.controller;
 
-import com.ethiopia.flightbooking.model.Airplane;
 import com.ethiopia.flightbooking.model.Airport;
 import com.ethiopia.flightbooking.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;

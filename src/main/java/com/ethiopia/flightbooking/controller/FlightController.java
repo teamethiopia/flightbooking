@@ -55,44 +55,10 @@ public class FlightController
     @PostMapping(value = {"/flightbooking/flight/search"})
     public String searchFlight(@ModelAttribute("flightdto") Flightdto flightdto,
                              BindingResult bindingResult, Model model,@RequestParam(defaultValue = "0") int pageNo) {
-
-//        System.out.println(flightdto.getFlightCount());
-//        System.out.println(flightdto.getFlightClass());
-//        System.out.println(flightdto.getChildren());
-//        System.out.println(flightdto.getAdult());
-//        System.out.println(flightdto.getFrom());
-//        System.out.println(flightdto.getTo());
-//        System.out.println(flightdto.getDateOfDeparture());
-//        System.out.println(flightdto.getDateOfReturn());
         model.addAttribute("currentPageNo", pageNo);
         model.addAttribute("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
         return "searchresult";
     }
-
-
-
-
-//    @GetMapping(value = {"/flightbooking/flight/search"})
-//    public ModelAndView searchFlight(@ModelAttribute("flightdto") Flightdto flightdto,
-//                              @RequestParam(defaultValue = "0") int pageNo) {
-//        ModelAndView mav = new ModelAndView();
-//        mav.addObject("currentPageNo", pageNo);
-//        if(flightdto.getDateOfDeparture() == null)
-//        {
-//           System.out.println("22222222222222222222222222222222222222222222222222222222222222222222222222222");
-//        }
-//        mav.addObject("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
-//        mav.setViewName("searchresult");
-//        // model.addAttribute("currentPageNo", pageNo);
-//        //model.addAttribute("flights",flightService.getSearchedFlightsPaged(flightdto.getDateOfDeparture(),flightdto.getFrom(),flightdto.getTo(),pageNo));
-//        return mav;
-//    }
-
-
-
-
-
-
 
 
     @GetMapping(value = "/flightbooking/flight/new")
