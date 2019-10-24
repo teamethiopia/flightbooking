@@ -13,5 +13,6 @@ public interface UserService
     User getUserById(Integer id);
     void deleteUserById(Integer id);
     User saveUser(User user);
+    User getUserByuserNameAndpasswWord(String un,String pw);
 
 }

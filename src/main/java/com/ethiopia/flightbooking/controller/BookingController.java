@@ -31,58 +31,6 @@ public class BookingController
     NotificationService notificationService;
 
 
-//    @GetMapping(value = {"/flightbooking/booking/new/{flightId}"})
-//    public ModelAndView displayNewBookingForm(@PathVariable Integer flightId,@ModelAttribute("flightdto") Flightdto flightdto)
-//    {
-//        ModelAndView mav = new ModelAndView();
-//        Flight flight = flightService.getFlightById(flightId);
-//        Booking booking  = new Booking();
-//        User user = new User();
-//
-//        if (flight != null) {
-//            mav.addObject("flightdto",flightdto);
-//            mav.addObject("booking",booking);
-//            mav.addObject("flight",flight);
-//            mav.addObject("user",user);
-//            mav.setViewName("booking/new");
-//            return mav;
-//        }
-//        mav.setViewName("searchresult");
-//        return mav;
-//    }
-
-
-
-//    @GetMapping(value = {"/flightbooking/booking/new/{flightId}/{flightCount}/{adult}/{children}/{flightClass}"})
-//    public String displayNewBookingForm(@PathVariable Integer flightId,@PathVariable String flightCount,
-//                                        @PathVariable Integer adult,@PathVariable Integer children,
-//                                        @PathVariable FlightClass flightClass
-//                                         ,Model model)
-//    {
-//        Flight flight = flightService.getFlightById(flightId);
-//        Booking booking  = new Booking();
-//        booking.setFlightCount(flightCount);
-//        booking.setAdult(adult);
-//        booking.setChildren(children);
-//        booking.setFlightClass(flightClass);
-//        User user = new User();
-//
-////        Flightdto flightdto = new Flightdto();
-////        flightdto.setAdult(adult);
-////        flightdto.setChildren(children);
-////        flightdto.setFlightClass(flightClass);
-////        flightdto.setFlightCount(flightCount);
-//
-//
-//        if (flight != null) {
-////            model.addAttribute("flightdto",flightdto);
-//            model.addAttribute("booking",booking);
-//            model.addAttribute("flight",flight);
-//            model.addAttribute("user",user);
-//            return "booking/new";
-//        }
-//        return "searchresult";
-//    }
 
 
 

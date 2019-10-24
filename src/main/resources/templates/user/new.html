@@ -57,7 +57,7 @@
 
             <form class="form-inline my-2 my-lg-0">
 
-                <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">My Bookings</a>
+                <a th:href="@{/flightbooking/booking/search}" class="btn btn-success btn-lg" type="button">My Bookings</a>
 
                 <a th:href="@{/flightbooking/user/new}" class="btn btn-success btn-lg" type="button">Register !</a>
 
@@ -90,6 +90,7 @@
     <form id="newUserForm" method="post" action="/flightbooking/user/new" th:object="${user}">
         <fieldset>
             <input type="hidden" name="userId" th:value="${user.userId}"/>
+<!--            <input type="hidden" name="role" th:value="${user.role}"/>-->
 
 
             <div class="row">

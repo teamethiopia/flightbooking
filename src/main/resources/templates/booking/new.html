@@ -58,9 +58,9 @@
 
             <form class="form-inline my-2 my-lg-0">
 
-                <a th:href="@{/flightbooking/signin}" class="btn btn-success btn-lg" type="button">My Bookings</a>
+                <a th:href="@{/flightbooking/booking/search}" class="btn btn-success btn-lg" type="button">My Bookings</a>
 
-                <a th:href="@{/flightbooking/signup}" class="btn btn-success btn-lg" type="button">Register !</a>
+                <a th:href="@{/flightbooking/user/new}" class="btn btn-success btn-lg" type="button">Register !</a>
 
                 <a th:href="@{/flightbooking/flight/list}" class="btn btn-success btn-lg" type="button">Admin Portal</a>
             </form>
@@ -128,7 +128,7 @@
 
         <div class="col-md-6">
             <label for="cities">Flight Route:</label>
-            <span style="font-size: 1.5em;font-weight: bold; color: #32a5e7;" id="cities" name="fn" th:text=" '&nbsp;' + '  From:'+'&nbsp;' + ${bookingdto.departingFlight.origin.airportCity} + '&nbsp;' +' To: ' + '&nbsp;' + ${bookingdto.departingFlight.origin.airportCity}"></span>
+            <span style="font-size: 1.5em;font-weight: bold; color: #32a5e7;" id="cities" name="fn" th:text=" '&nbsp;' + '  From:'+'&nbsp;' + ${bookingdto.departingFlight.origin.airportCity} + '&nbsp;' +' To: ' + '&nbsp;' + ${bookingdto.departingFlight.destination.airportCity}"></span>
         </div>
 
     </div>

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="/css/CongraPageStyle.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/UserRegistrationPage.css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,13 +51,13 @@
                 <!--                border-left: white 3px solid;-->
 
                 <li class="nav-item" style=" padding-left: 4em; padding-right: 2em;">
-                    <span style="color:yellow; padding-left: 2em; padding-right: 1em;">Successfully Registered.</span>
+                    <span style="color:yellow; padding-left: 2em; padding-right: 1em;">Login!</span>
                 </li>
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
 
-                <a th:href="@{/flightbooking/booking/search}" class="btn btn-success btn-lg" type="button">My Bookings</a>
+                <a th:href="@{/flightbooking/user/new}" class="btn btn-success btn-lg" type="button">Register !</a>
 
                 <a th:href="@{/flightbooking/flight/list}" class="btn btn-success btn-lg" type="button">Admin Portal</a>
             </form>
@@ -81,19 +81,46 @@
 
 
 
-<div  style="size: auto;padding-left: 50px;padding-right: 50px;padding-top: 200px;">
+<div class="container">
 
-<!--    <div  class="message">-->
+    <div style="padding-top: 120px;padding-left: 40%;">
+
+        <form id="userloginform" method="post" action="/flightbooking/user/login" th:object="${user}">
+            <fieldset>
+
+                <input type="hidden" name="userName" th:value="${user.userName}"/>
+                <input type="hidden" name="passWord" th:value="${user.passWord}"/>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fn">UserName</label>
+                            <input id="fn" name="userName" type="email" class="form-control" placeholder="UserName"
+                                   th:value="${user.userName}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pw">Password</label>
+                            <input id="pw" name="passWord" type="password" class="form-control" placeholder="Password"
+                                   th:value="${user.passWord}">
+                        </div>
+                    </div>
+                </div>
+
+                <div >
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Login</button>
+                </div>
 
 
 
-<!--        -->
+            </fieldset>
+        </form>
 
-
-
-
-
-<!--    </div>-->
+    </div>
 
 </div>
 
