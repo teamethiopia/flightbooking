@@ -153,7 +153,16 @@ public class BookingController
         booking.setFlightClass(bookingdto.getFlightClass());
         booking.setConfirmationCode(bookingService.randomAlphaNumeric(20));
 
-        String body = "Dear "+booking.getUser().getFirstName()+"\n"+"Thank you For Choosing US!!!" + "\n" + "Your Booking Confirmation number is : " + booking.getConfirmationCode() + "\n" ;
+
+
+        String body = "\n"+"Dear "+booking.getUser().getFirstName()+"\n"+"Thank you For Choosing Team Ethiopia For your Booking!!!" + "\n"+ "\n" + "Your Booking Confirmation number is : " + booking.getConfirmationCode() + "\n"+ "\n"
+                +"Flight Details: " + "\n" + "From: " + bookingdto.getDepartingFlight().getOrigin().getAirportCity()
+                + "          " + "To: " + bookingdto.getDepartingFlight().getOrigin().getAirportCity() + "\n"
+                + "Date: " + bookingdto.getDepartingFlight().getDepartureDate() + "\n"
+                + "Time: " + bookingdto.getDepartingFlight().getDepartureTime() + "\n"
+                + "Class: " + bookingdto.getFlightClass().toString() + "   Adults: " +bookingdto.getAdult() + "   Children: " +bookingdto.getChildren()
+                ;
+
 
         notificationService.sendNotification("dawitgirma00@gmail.com",user.getUserName(),body,"Booking confirmation");
 

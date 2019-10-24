@@ -115,8 +115,8 @@
             <!--<tr class="datarow" th:each="product,iterStat : ${products}" th:onclick="@{document.location='/prodmgmt/products/edit/{productId}'(productId=${product.productId})}">-->
 
             <tr class="datarow"  bgcolor="#D87272" th:each="flight,iterStat : ${flights}">
-                <th style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" scope="row" th:text="${iterStat.count}+'.'"></th>
-                <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.airline.airlineName}"></td>
+                <th style="vertical-align: middle; color: black;font-size: large;font-weight: bolder"  height="100px" scope="row" th:text="${iterStat.count}+'.'"></th>
+                <td style="vertical-align: middle; color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.airline.airlineName}"></td>
                 <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.flightNumber}"></td>
                 <td style="vertical-align: middle;color: black;font-size: large;font-weight: bolder"  height="100px" th:text="${flight.origin.airportCity}"></td>
                 <td style="vertical-align: middle;color:darkred;font-size: large;font-weight: bolder"  height="100px" >----></td>
