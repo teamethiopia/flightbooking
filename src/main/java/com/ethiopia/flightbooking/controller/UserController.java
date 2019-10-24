@@ -37,8 +37,9 @@ public class UserController
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "user/new";
         }
+        System.out.println("Dave");
         user = userService.saveUser(user);
-        return "redirect:/flightbooking/new/congra";
+        return "user/congra";
     }
 
 }
